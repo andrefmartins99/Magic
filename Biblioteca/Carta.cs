@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace Biblioteca
 {
     enum Cores
     {
-        Vermelho,
-        Verde,
-        Azul,
-        Preto
+        Red,
+        Green,
+        Blue,
+        Black
     }
 
     public abstract class Carta
@@ -18,46 +19,45 @@ namespace Biblioteca
 
         public string NomeCarta { get; set; }
 
-        public string CorCarta { get; set; }
+        public Color CorCarta { get; set; }
 
         public string DescricaoCarta { get; set; }
 
         public int CustoCarta { get; set; }
 
-        public Carta(int cor, int custo)
+        public Carta(int cor)
         {
             CorCarta = CorDaCarta(cor);
-            CustoCarta = custo;
         }
 
-        public string CorDaCarta(int cor)
+        public Color CorDaCarta(int cor)
         {
             Cores cores;
 
             switch (cor)
             {
                 case 0:
-                    cores = Cores.Vermelho;
+                    cores = Cores.Red;
                     break;
 
                 case 1:
-                    cores = Cores.Verde;
+                    cores = Cores.Green;
                     break;
 
                 case 2:
-                    cores = Cores.Azul;
+                    cores = Cores.Blue;
                     break;
 
                 case 3:
-                    cores = Cores.Preto;
+                    cores = Cores.Black;
                     break;
 
                 default:
-                    cores = Cores.Vermelho;
+                    cores = Cores.Red;
                     break;
             }
 
-            return cores.ToString();
+            return Color.FromName(cores.ToString());
         }
 
         public override string ToString()
@@ -66,7 +66,7 @@ namespace Biblioteca
                 $"{Environment.NewLine}" +
                 $"Nome: {NomeCarta}{Environment.NewLine}" +
                 $"Cor: {CorCarta}{Environment.NewLine}" +
-                $"Custo: {CustoCarta}{Environment.NewLine}" +
+                $"Custo: {CustoCarta} Mana{Environment.NewLine}" +
                 $"{Environment.NewLine}" +
                 $"Descrição: {DescricaoCarta}";
         }

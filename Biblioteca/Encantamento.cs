@@ -60,7 +60,7 @@ namespace Biblioteca
                 $"{Environment.NewLine}" +
                 $"Nome: {NomeCarta}{Environment.NewLine}" +
                 $"Cor: {CorCarta}{Environment.NewLine}" +
-                $"Custo: {CustoCarta}{Environment.NewLine}" +
+                $"Custo: {CustoCarta} Mana{Environment.NewLine}" +
                 $"{Environment.NewLine}" +
                 $"{DescricaoCarta}";
         }

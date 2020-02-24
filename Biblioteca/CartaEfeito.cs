@@ -8,9 +8,10 @@ namespace Biblioteca
     {
         public List<Efeito> Efeitos { get; set; }
 
-        public CartaEfeito(int cor, int custo, int efeito) : base(cor, custo)
+        public CartaEfeito(int cor, int custo, int efeito) : base(cor)
         {
             Efeitos = PreencherListaEfeitos();
+            CustoCarta = custo;
             NomeCarta = Efeitos[efeito].NomeAcao;
             DescricaoCarta = Efeitos[efeito].DescricaoAcao;
         }

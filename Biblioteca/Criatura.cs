@@ -26,11 +26,11 @@ namespace Biblioteca
 
             if (numHabilidade == 0)
             {
-                DescricaoCarta = "Esta carta não possui habilidades.";
+                DescricaoCarta = "Esta carta não possui habilidades." + Environment.NewLine;
             }
             else if (numHabilidade == 1)
             {
-                DescricaoCarta = "Habilidade 1: " + Habilidades[habilidade].NomeAcao + ", " + Habilidades[habilidade].DescricaoAcao;
+                DescricaoCarta = "Habilidade 1: " + Habilidades[habilidade].NomeAcao + ", " + Habilidades[habilidade].DescricaoAcao + Environment.NewLine;
             }
             else
             {
@@ -96,7 +96,7 @@ namespace Biblioteca
                 $"{Environment.NewLine}" +
                 $"Nome: {NomeCarta}{Environment.NewLine}" +
                 $"Cor: {CorCarta}{Environment.NewLine}" +
-                $"Custo: {CustoCarta}{Environment.NewLine}" +
+                $"Custo: {CustoCarta} Mana{Environment.NewLine}" +
                 $"{Environment.NewLine}" +
                 $"{DescricaoCarta}{Environment.NewLine}" +
                 $"{Environment.NewLine}" +

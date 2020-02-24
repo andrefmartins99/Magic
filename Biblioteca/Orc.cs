@@ -14,7 +14,7 @@ namespace Biblioteca
 
         public void FinalizarDescricaoCriatura(int descricao)
         {
-            DescricaoCarta += Environment.NewLine + Environment.NewLine + $"Descrição: {NomeCarta} {DescreverCriatura(descricao)}";
+            DescricaoCarta += Environment.NewLine + $"Descrição: {NomeCarta} {DescreverCriatura(descricao)}";
         }
     }
 }

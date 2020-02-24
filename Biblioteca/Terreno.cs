@@ -6,11 +6,12 @@ namespace Biblioteca
 {
     public class Terreno : Carta
     {
-        public Terreno(int nome, int cor, int desc, int custo) : base(cor, custo)
+        public Terreno(int nome, int cor, int desc) : base(cor)
         {
             TipoCarta = "Terreno";
             NomeCarta = NomeDaCarta(nome);
             DescricaoCarta = DescricaoDaCarta(nome, desc);
+            CustoCarta = 0;
         }
 
         public string NomeDaCarta(int nome)

@@ -8,9 +8,10 @@ namespace Biblioteca
     {
         public List<Habilidade> Habilidades { get; set; }
 
-        public CartaHabilidade(int cor, int custo) : base(cor, custo)
+        public CartaHabilidade(int cor, int custo) : base(cor)
         {
             Habilidades = PreencherListaHabilidades();
+            CustoCarta = custo;
         }
 
         public List<Habilidade> PreencherListaHabilidades()
