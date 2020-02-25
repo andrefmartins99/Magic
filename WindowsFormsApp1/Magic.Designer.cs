@@ -43,10 +43,20 @@
             this.lblCusto2 = new System.Windows.Forms.Label();
             this.lblNome2 = new System.Windows.Forms.Label();
             this.btnGerar = new System.Windows.Forms.Button();
+            this.lblJogador1 = new System.Windows.Forms.Label();
+            this.lblVida1 = new System.Windows.Forms.Label();
+            this.btnIniciar = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.lblJogador2 = new System.Windows.Forms.Label();
+            this.lblVida2 = new System.Windows.Forms.Label();
+            this.btnLutar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -124,7 +134,7 @@
             // 
             this.lblNome1.BackColor = System.Drawing.Color.White;
             this.lblNome1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblNome1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNome1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNome1.Location = new System.Drawing.Point(13, 19);
             this.lblNome1.Name = "lblNome1";
             this.lblNome1.Size = new System.Drawing.Size(305, 23);
@@ -206,7 +216,7 @@
             // 
             this.lblNome2.BackColor = System.Drawing.Color.White;
             this.lblNome2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblNome2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNome2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNome2.Location = new System.Drawing.Point(13, 19);
             this.lblNome2.Name = "lblNome2";
             this.lblNome2.Size = new System.Drawing.Size(305, 23);
@@ -222,22 +232,112 @@
             this.btnGerar.TabIndex = 2;
             this.btnGerar.Text = "Gerar Cartas";
             this.btnGerar.UseVisualStyleBackColor = true;
+            this.btnGerar.Visible = false;
             this.btnGerar.Click += new System.EventHandler(this.btnGerar_Click);
+            // 
+            // lblJogador1
+            // 
+            this.lblJogador1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblJogador1.Location = new System.Drawing.Point(12, 24);
+            this.lblJogador1.Name = "lblJogador1";
+            this.lblJogador1.Size = new System.Drawing.Size(100, 23);
+            this.lblJogador1.TabIndex = 3;
+            this.lblJogador1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblVida1
+            // 
+            this.lblVida1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVida1.Location = new System.Drawing.Point(12, 54);
+            this.lblVida1.Name = "lblVida1";
+            this.lblVida1.Size = new System.Drawing.Size(100, 23);
+            this.lblVida1.TabIndex = 5;
+            this.lblVida1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnIniciar
+            // 
+            this.btnIniciar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIniciar.Location = new System.Drawing.Point(554, 47);
+            this.btnIniciar.Name = "btnIniciar";
+            this.btnIniciar.Size = new System.Drawing.Size(159, 54);
+            this.btnIniciar.TabIndex = 7;
+            this.btnIniciar.Text = "Iniciar";
+            this.btnIniciar.UseVisualStyleBackColor = true;
+            this.btnIniciar.Click += new System.EventHandler(this.btnIniciar_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.lblJogador1);
+            this.panel3.Controls.Add(this.lblVida1);
+            this.panel3.Location = new System.Drawing.Point(33, 333);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(128, 100);
+            this.panel3.TabIndex = 8;
+            this.panel3.Visible = false;
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.lblJogador2);
+            this.panel4.Controls.Add(this.lblVida2);
+            this.panel4.Location = new System.Drawing.Point(1104, 333);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(128, 100);
+            this.panel4.TabIndex = 9;
+            this.panel4.Visible = false;
+            // 
+            // lblJogador2
+            // 
+            this.lblJogador2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblJogador2.Location = new System.Drawing.Point(12, 24);
+            this.lblJogador2.Name = "lblJogador2";
+            this.lblJogador2.Size = new System.Drawing.Size(100, 23);
+            this.lblJogador2.TabIndex = 3;
+            this.lblJogador2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblVida2
+            // 
+            this.lblVida2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVida2.Location = new System.Drawing.Point(12, 54);
+            this.lblVida2.Name = "lblVida2";
+            this.lblVida2.Size = new System.Drawing.Size(100, 23);
+            this.lblVida2.TabIndex = 5;
+            this.lblVida2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnLutar
+            // 
+            this.btnLutar.Enabled = false;
+            this.btnLutar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLutar.Location = new System.Drawing.Point(730, 47);
+            this.btnLutar.Name = "btnLutar";
+            this.btnLutar.Size = new System.Drawing.Size(159, 54);
+            this.btnLutar.TabIndex = 10;
+            this.btnLutar.Text = "Lutar";
+            this.btnLutar.UseVisualStyleBackColor = true;
+            this.btnLutar.Visible = false;
+            this.btnLutar.Click += new System.EventHandler(this.btnLutar_Click);
             // 
             // Magic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 740);
+            this.Controls.Add(this.btnLutar);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.btnIniciar);
             this.Controls.Add(this.btnGerar);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.MaximumSize = new System.Drawing.Size(1283, 787);
             this.Name = "Magic";
             this.Text = "Magic";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -259,6 +359,14 @@
         private System.Windows.Forms.Label lblCusto2;
         private System.Windows.Forms.Label lblNome2;
         private System.Windows.Forms.Button btnGerar;
+        private System.Windows.Forms.Label lblJogador1;
+        private System.Windows.Forms.Label lblVida1;
+        private System.Windows.Forms.Button btnIniciar;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label lblJogador2;
+        private System.Windows.Forms.Label lblVida2;
+        private System.Windows.Forms.Button btnLutar;
     }
 }
 

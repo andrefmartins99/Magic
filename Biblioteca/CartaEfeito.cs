@@ -6,6 +6,8 @@ namespace Biblioteca
 {
     public abstract class CartaEfeito : Carta
     {
+        public int AcaoEfeito { get; set; }
+
         public List<Efeito> Efeitos { get; set; }
 
         public CartaEfeito(int cor, int custo, int efeito) : base(cor)
@@ -14,6 +16,7 @@ namespace Biblioteca
             CustoCarta = custo;
             NomeCarta = Efeitos[efeito].NomeAcao;
             DescricaoCarta = Efeitos[efeito].DescricaoAcao;
+            AcaoEfeito = Efeitos[efeito].AcaoAcao;
         }
 
         public List<Efeito> PreencherListaEfeitos()

@@ -10,7 +10,8 @@ namespace Biblioteca
         Red,
         Green,
         Blue,
-        Black
+        Black,
+        Orange
     }
 
     public abstract class Carta
@@ -50,6 +51,10 @@ namespace Biblioteca
 
                 case 3:
                     cores = Cores.Black;
+                    break;
+
+                case 4:
+                    cores = Cores.Orange;
                     break;
 
                 default:

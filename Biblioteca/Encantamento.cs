@@ -6,51 +6,35 @@ namespace Biblioteca
 {
     public class Encantamento : CartaHabilidade
     {
-        public Encantamento(int cor, int custo, int numHabilidade, int habilidade) : base(cor, custo)
+        public Encantamento(int cor, int custo, int numHabilidade, int habilidade1, int habilidade2) : base(cor, custo)
         {
             TipoCarta = "Encantamento";
-            NomeEDescricaoEncantamento(numHabilidade, habilidade);
+            NomeEDescricaoEncantamento(numHabilidade, habilidade1, habilidade2);
         }
 
-        public void NomeEDescricaoEncantamento(int numHabilidade, int habilidade)
+        public void NomeEDescricaoEncantamento(int numHabilidade, int habilidade1, int habilidade2)
         {
-            Random rng = new Random();
-            int rnd;
-            int contador = 1;
-
             if (numHabilidade == 0)
             {
                 NomeCarta = "13 Gatos pretos";
                 DescricaoCarta = "Esta carta não possui habilidades.";
+                AcaoHabilidade = 0;
             }
             else if (numHabilidade == 1)
             {
-                NomeCarta = Habilidades[habilidade].NomeAcao;
-                DescricaoCarta = "Habilidade 1: " + Habilidades[habilidade].DescricaoAcao;
+                NomeCarta = Habilidades[habilidade1].NomeAcao;
+                DescricaoCarta = "Habilidade 1: " + Habilidades[habilidade1].DescricaoAcao;
+                AcaoHabilidade = Habilidades[habilidade1].AcaoAcao;
             }
             else
             {
                 NomeCarta = "Trevo de 4 folhas";
 
-                for (int i = 0; i < numHabilidade; i++)
-                {
-                    if (i == 0)
-                    {
-                        DescricaoCarta = $"Habilidade 1: " + Habilidades[habilidade].NomeAcao + ", " + Habilidades[habilidade].DescricaoAcao + Environment.NewLine;
-                    }
-                    else
-                    {
-                        do
-                        {
-                            rnd = rng.Next(0, 5);
+                DescricaoCarta = $"Habilidade 1: " + Habilidades[habilidade1].NomeAcao + ", " + Habilidades[habilidade1].DescricaoAcao + Environment.NewLine;
+                AcaoHabilidade = Habilidades[habilidade1].AcaoAcao;
 
-                        } while (rnd == habilidade);
-
-                        DescricaoCarta += $"Habilidade {contador}: " + Habilidades[rnd].NomeAcao + ", " + Habilidades[rnd].DescricaoAcao + Environment.NewLine;
-                    }
-
-                    contador++;
-                }
+                DescricaoCarta += $"Habilidade 2: " + Habilidades[habilidade2].NomeAcao + ", " + Habilidades[habilidade2].DescricaoAcao;
+                AcaoHabilidade += Habilidades[habilidade2].AcaoAcao;
             }
         }
 

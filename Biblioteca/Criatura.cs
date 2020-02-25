@@ -10,49 +10,33 @@ namespace Biblioteca
 
         public int DefesaCriatura { get; set; }
 
-        public Criatura(int cor, int custo, int numHabilidade, int habilidade, int descricao, int ataque, int defesa) : base(cor, custo)
+        public Criatura(int cor, int custo, int numHabilidade, int habilidade1, int habilidade2, int ataque, int defesa) : base(cor, custo)
         {
             TipoCarta = "Criatura";
-            DescricaoCriatura(numHabilidade, habilidade, descricao);
+            DescricaoCriatura(numHabilidade, habilidade1, habilidade2);
             AtaqueCriatura = ataque;
             DefesaCriatura = defesa;
         }
 
-        public void DescricaoCriatura(int numHabilidade, int habilidade, int descricao)
+        public void DescricaoCriatura(int numHabilidade, int habilidade1, int habilidade2)
         {
-            Random rng = new Random();
-            int rnd;
-            int contador = 1;
-
             if (numHabilidade == 0)
             {
                 DescricaoCarta = "Esta carta não possui habilidades." + Environment.NewLine;
+                AcaoHabilidade = 0;
             }
             else if (numHabilidade == 1)
             {
-                DescricaoCarta = "Habilidade 1: " + Habilidades[habilidade].NomeAcao + ", " + Habilidades[habilidade].DescricaoAcao + Environment.NewLine;
+                DescricaoCarta = "Habilidade 1: " + Habilidades[habilidade1].NomeAcao + ", " + Habilidades[habilidade1].DescricaoAcao + Environment.NewLine;
+                AcaoHabilidade = Habilidades[habilidade1].AcaoAcao;
             }
             else
             {
-                for (int i = 0; i < numHabilidade; i++)
-                {
-                    if (i == 0)
-                    {
-                        DescricaoCarta = $"Habilidade 1: " + Habilidades[habilidade].NomeAcao + ", " + Habilidades[habilidade].DescricaoAcao + Environment.NewLine;
-                    }
-                    else
-                    {
-                        do
-                        {
-                            rnd = rng.Next(0, 5);
+                DescricaoCarta = "Habilidade 1: " + Habilidades[habilidade1].NomeAcao + ", " + Habilidades[habilidade1].DescricaoAcao + Environment.NewLine;
+                AcaoHabilidade = Habilidades[habilidade1].AcaoAcao;
 
-                        } while (rnd == habilidade);
-
-                        DescricaoCarta += $"Habilidade {contador}: " + Habilidades[rnd].NomeAcao + ", " + Habilidades[rnd].DescricaoAcao + Environment.NewLine;
-                    }
-
-                    contador++;
-                }
+                DescricaoCarta += "Habilidade 2: " + Habilidades[habilidade2].NomeAcao + ", " + Habilidades[habilidade2].DescricaoAcao + Environment.NewLine;
+                AcaoHabilidade += Habilidades[habilidade2].AcaoAcao;
             }
         }
 
@@ -63,7 +47,7 @@ namespace Biblioteca
             switch (descricao)
             {
                 case 0:
-                    descrever = "é uma carta matreira, se não tiveres de olho nela ela ROUBA-TE a escova dos dentes";
+                    descrever = "é uma carta matreira, se não tiveres de olho nela ela rouba-te a escova dos dentes";
                     break;
 
                 case 1:
@@ -71,15 +55,15 @@ namespace Biblioteca
                     break;
 
                 case 2:
-                    descrever = "é uma carta";
+                    descrever = "é uma carta habilidosa, consegue fazer malabarismo com 2 bolas desde os 10 anos";
                     break;
 
                 case 3:
-                    descrever = "é uma carta";
+                    descrever = "é uma carta preocupada, consigo mesma";
                     break;
 
                 case 4:
-                    descrever = "é uma carta";
+                    descrever = "é uma carta empenhada, em não fazer nada da vida";
                     break;
 
                 default:
