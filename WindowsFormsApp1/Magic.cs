@@ -13,23 +13,71 @@ namespace WindowsFormsApp1
 {
     public partial class Magic : Form
     {
-        int acaoEfeito1, acaoEfeito2, acaoHabilidade1, acaoHabilidade2, ataque1, ataque2, vida1, vida2;
+        public List<Habilidade> Habilidades { get; }
+
+        public List<Efeito> Efeitos { get; }
+
+        public Terreno CartaTerreno { get; set; }
+
+        public Feitico CartaFeitico { get; set; }
+
+        public MagicaInstantanea CartaMagicaInstantanea { get; set; }
+
+        public Encantamento CartaEncantamento { get; set; }
+
+        public Elfo CartaCriaturaElfo { get; set; }
+
+        public Humano CartaCriaturaHumano { get; set; }
+
+        public Orc CartaCriaturaOrc { get; set; }
+
+        public Anao CartaCriaturaAnao { get; set; }
+
+        public int AcaoEfeito1 { get; set; }
+
+        public int AcaoEfeito2 { get; set; }
+
+        public int AcaoHabilidade1 { get; set; }
+
+        public int AcaoHabilidade2 { get; set; }
+
+        public int Ataque1 { get; set; }
+
+        public int Ataque2 { get; set; }
+
+        public int Vida1 { get; set; }
+
+        public int Vida2 { get; set; }
 
         public Magic()
         {
             InitializeComponent();
+            Habilidades = MetodosCartaHabilidade.PreencherListaHabilidades();
+            Efeitos = MetodosCartaEfeito.PreencherListaEfeitos();
         }
 
+        //Iniciar Jogo
+        private void btnIniciar_Click(object sender, EventArgs e)
+        {
+            btnIniciar.Visible = false;
+            btnGerar.Visible = true;
+            btnLutar.Visible = true;
+            panel1.Visible = true;
+            panel2.Visible = true;
+            panel3.Visible = true;
+            panel4.Visible = true;
+            VidaInicialJogadores();
+        }
+
+        //Gerar cartas
         private void btnGerar_Click(object sender, EventArgs e)
         {
-            Random rng = new Random();
-            int rnd, numCarta = 1;
-            acaoEfeito1 = 0;
-            acaoEfeito2 = 0;
-            acaoHabilidade1 = 0;
-            acaoHabilidade2 = 0;
-            ataque1 = 0;
-            ataque2 = 0;
+            Random rng;
+            int rnd;
+            int numCarta = 1;
+            NovoTurno();
+
+            rng = GerarRandom(numCarta);
 
             do
             {
@@ -38,57 +86,48 @@ namespace WindowsFormsApp1
                 switch (rnd)
                 {
                     case 1:
-                        Terreno cartaTerreno;
-                        cartaTerreno = CriarCartaTerreno();
-                        ExibeTerreno(cartaTerreno, numCarta);
+                        CriarCartaTerreno(numCarta);
+                        ExibeTerreno(numCarta);
                         break;
 
                     case 2:
-                        Feitico cartaFeitico;
-                        cartaFeitico = CriarCartaFeitico(numCarta, ref acaoEfeito1, ref acaoEfeito2);
-                        ExibeFeitico(cartaFeitico, numCarta);
+                        CriarCartaFeitico(numCarta);
+                        ExibeFeitico(numCarta);
                         break;
 
                     case 3:
-                        MagicaInstantanea cartaMagicaInstantanea;
-                        cartaMagicaInstantanea = CriarCartaMagicaInstantanea(numCarta, ref acaoEfeito1, ref acaoEfeito2);
-                        ExibeMagicaInstantanea(cartaMagicaInstantanea, numCarta);
+                        CriarCartaMagicaInstantanea(numCarta);
+                        ExibeMagicaInstantanea(numCarta);
                         break;
 
                     case 4:
-                        Encantamento cartaEncantamento;
-                        cartaEncantamento = CriarCartaEncantamento(numCarta, ref acaoHabilidade1, ref acaoHabilidade2);
-                        ExibeEncantamento(cartaEncantamento, numCarta);
+                        CriarCartaEncantamento(numCarta);
+                        ExibeEncantamento(numCarta);
                         break;
 
                     case 5:
-                        Elfo cartaCriaturaElfo;
-                        cartaCriaturaElfo = CriarCartaCriaturaElfo(numCarta, ref acaoHabilidade1, ref acaoHabilidade2, ref ataque1, ref ataque2);
-                        ExibeCriaturaElfo(cartaCriaturaElfo, numCarta);
+                        CriarCartaCriaturaElfo(numCarta);
+                        ExibeCriaturaElfo(numCarta);
                         break;
 
                     case 6:
-                        Humano cartaCriaturaHumano;
-                        cartaCriaturaHumano = CriarCartaCriaturaHumano(numCarta, ref acaoHabilidade1, ref acaoHabilidade2, ref ataque1, ref ataque2);
-                        ExibeCriaturaHumano(cartaCriaturaHumano, numCarta);
+                        CriarCartaCriaturaHumano(numCarta);
+                        ExibeCriaturaHumano(numCarta);
                         break;
 
                     case 7:
-                        Orc cartaCriaturaOrc;
-                        cartaCriaturaOrc = CriarCartaCriaturaOrc(numCarta, ref acaoHabilidade1, ref acaoHabilidade2, ref ataque1, ref ataque2);
-                        ExibeCriaturaOrc(cartaCriaturaOrc, numCarta);
+                        CriarCartaCriaturaOrc(numCarta);
+                        ExibeCriaturaOrc(numCarta);
                         break;
 
                     case 8:
-                        Anao cartaCriaturaAnao;
-                        cartaCriaturaAnao = CriarCartaCriaturaAnao(numCarta, ref acaoHabilidade1, ref acaoHabilidade2, ref ataque1, ref ataque2);
-                        ExibeCriaturaAnao(cartaCriaturaAnao, numCarta);
+                        CriarCartaCriaturaAnao(numCarta);
+                        ExibeCriaturaAnao(numCarta);
                         break;
 
                     default:
-                        Humano cartaCriaturaHumanoDefault;
-                        cartaCriaturaHumanoDefault = CriarCartaCriaturaHumano(numCarta, ref acaoHabilidade1, ref acaoHabilidade2, ref ataque1, ref ataque2);
-                        ExibeCriaturaHumano(cartaCriaturaHumanoDefault, numCarta);
+                        CriarCartaCriaturaHumano(numCarta);
+                        ExibeCriaturaHumano(numCarta);
                         break;
                 }
 
@@ -100,69 +139,160 @@ namespace WindowsFormsApp1
             btnLutar.Enabled = true;
         }
 
-        public Terreno CriarCartaTerreno()
+        //Luta
+        private void btnLutar_Click(object sender, EventArgs e)
         {
-            Random rng = new Random();
+            if (AcaoEfeito1 > 0 && AcaoEfeito2 > 0)
+            {
+                Vida1 += AcaoEfeito1;
+                Vida2 += AcaoEfeito2;
+
+                AtualizarVidaJogadores();
+            }
+            else if (AcaoEfeito1 > 0)
+            {
+                Vida1 += AcaoEfeito1;
+                AtualizarVidaJogadores();
+
+                Vida1 += AcaoHabilidade2;
+                AtualizarVidaJogadores();
+                FinalizarJogo();
+
+                Vida1 -= Ataque2;
+                AtualizarVidaJogadores();
+                FinalizarJogo();
+            }
+            else if (AcaoEfeito2 > 0)
+            {
+                Vida2 += AcaoEfeito2;
+
+                Vida2 += AcaoHabilidade1;
+                AtualizarVidaJogadores();
+                FinalizarJogo();
+
+                Vida2 -= Ataque1;
+                AtualizarVidaJogadores();
+                FinalizarJogo();
+            }
+            else
+            {
+                Vida1 += AcaoEfeito2;
+                AtualizarVidaJogadores();
+                FinalizarJogo();
+                Vida2 += AcaoEfeito1;
+                AtualizarVidaJogadores();
+                FinalizarJogo();
+
+                Vida1 += AcaoHabilidade2;
+                AtualizarVidaJogadores();
+                FinalizarJogo();
+                Vida2 += AcaoHabilidade1;
+                AtualizarVidaJogadores();
+                FinalizarJogo();
+
+                if (Ataque1 > Ataque2)
+                {
+                    Vida2 -= (Ataque1 - Ataque2);
+                    AtualizarVidaJogadores();
+                    FinalizarJogo();
+                }
+                else if (Ataque1 < Ataque2)
+                {
+                    Vida1 -= (Ataque2 - Ataque1);
+                    AtualizarVidaJogadores();
+                    FinalizarJogo();
+                }
+            }
+
+            btnGerar.Enabled = true;
+            btnLutar.Enabled = false;
+        }
+
+        /// <summary>
+        /// Criar carta do tipo Terreno
+        /// </summary>
+        /// <param name="numCarta">Número que corresponde ao nº da carta a ser criada (1º carta ou 2º carta)</param>
+        public void CriarCartaTerreno(int numCarta)
+        {
+            Random rng;
+
+            rng = GerarRandom(numCarta);
+
             int nome, cor, desc;
 
             nome = rng.Next(0, 2);
             cor = rng.Next(0, 5);
             desc = rng.Next(0, 3);
 
-            Terreno cartaTerreno = new Terreno(nome, cor, desc);
-
-            return cartaTerreno;
+            CartaTerreno = new Terreno(nome, cor, desc);
         }
 
-        public Feitico CriarCartaFeitico(int numCarta, ref int acaoEfeito1, ref int acaoEfeito2)
+        /// <summary>
+        /// Criar carta do tipo Feitiço
+        /// </summary>
+        /// <param name="numCarta">Número que corresponde ao nº da carta a ser criada (1º carta ou 2º carta)</param>
+        public void CriarCartaFeitico(int numCarta)
         {
-            Random rng = new Random();
+            Random rng;
+
+            rng = GerarRandom(numCarta);
+
             int cor, custo, efeito;
 
             cor = rng.Next(0, 5);
             custo = rng.Next(1, 6);
             efeito = rng.Next(0, 5);
 
-            Feitico cartaFeitico = new Feitico(cor, custo, efeito);
+            CartaFeitico = new Feitico(cor, custo, efeito, Efeitos);
 
             if (numCarta == 1)
             {
-                acaoEfeito1 = cartaFeitico.AcaoEfeito;
+                AcaoEfeito1 = CartaFeitico.AcaoEfeito;
             }
             else
             {
-                acaoEfeito2 = cartaFeitico.AcaoEfeito;
+                AcaoEfeito2 = CartaFeitico.AcaoEfeito;
             }
-
-            return cartaFeitico;
         }
 
-        public MagicaInstantanea CriarCartaMagicaInstantanea(int numCarta, ref int acaoEfeito1, ref int acaoEfeito2)
+        /// <summary>
+        /// Criar carta do tipo Mágica Instantânea
+        /// </summary>
+        /// <param name="numCarta">Número que corresponde ao nº da carta a ser criada (1º carta ou 2º carta)</param>
+        public void CriarCartaMagicaInstantanea(int numCarta)
         {
-            Random rng = new Random();
+            Random rng;
+
+            rng = GerarRandom(numCarta);
+
             int cor, custo, efeito;
 
             cor = rng.Next(0, 5);
             custo = rng.Next(1, 6);
             efeito = rng.Next(0, 5);
 
-            MagicaInstantanea cartaMagicaInstantanea = new MagicaInstantanea(cor, custo, efeito);
+            CartaMagicaInstantanea = new MagicaInstantanea(cor, custo, efeito, Efeitos);
 
             if (numCarta == 1)
             {
-                acaoEfeito1 = cartaMagicaInstantanea.AcaoEfeito;
+                AcaoHabilidade1 = CartaMagicaInstantanea.AcaoEfeito;
             }
             else
             {
-                acaoEfeito2 = cartaMagicaInstantanea.AcaoEfeito;
+                AcaoHabilidade2 = CartaMagicaInstantanea.AcaoEfeito;
             }
-
-            return cartaMagicaInstantanea;
         }
 
-        public Encantamento CriarCartaEncantamento(int numCarta, ref int acaoHabilidade1, ref int acaoHabilidade2)
+        /// <summary>
+        /// Criar carta do tipo Encantamento
+        /// </summary>
+        /// <param name="numCarta">Número que corresponde ao nº da carta a ser criada (1º carta ou 2º carta)</param>
+        public void CriarCartaEncantamento(int numCarta)
         {
-            Random rng = new Random();
+            Random rng;
+
+            rng = GerarRandom(numCarta);
+
             int cor, custo, numHabilidade, habilidade1, habilidade2;
 
             cor = rng.Next(0, 5);
@@ -176,23 +306,28 @@ namespace WindowsFormsApp1
 
             } while (habilidade2 == habilidade1);
 
-            Encantamento cartaEncantamento = new Encantamento(cor, custo, numHabilidade, habilidade1, habilidade2);
+            CartaEncantamento = new Encantamento(cor, custo, numHabilidade, habilidade1, habilidade2, Habilidades);
 
             if (numCarta == 1)
             {
-                acaoHabilidade1 = cartaEncantamento.AcaoHabilidade;
+                AcaoHabilidade1 = CartaEncantamento.AcaoHabilidade;
             }
             else
             {
-                acaoHabilidade2 = cartaEncantamento.AcaoHabilidade;
+                AcaoHabilidade2 = CartaEncantamento.AcaoHabilidade;
             }
-
-            return cartaEncantamento;
         }
 
-        public Elfo CriarCartaCriaturaElfo(int numCarta, ref int acaoHabilidade1, ref int acaoHabilidade2, ref int ataque1, ref int ataque2)
+        /// <summary>
+        /// Criar carta do tipo Criatura/Elfo
+        /// </summary>
+        /// <param name="numCarta">Número que corresponde ao nº da carta a ser criada (1º carta ou 2º carta)</param>
+        public void CriarCartaCriaturaElfo(int numCarta)
         {
-            Random rng = new Random();
+            Random rng;
+
+            rng = GerarRandom(numCarta);
+
             int cor, custo, numHabilidade, habilidade1, habilidade2, descricao, ataque, defesa;
 
             cor = rng.Next(0, 5);
@@ -209,25 +344,30 @@ namespace WindowsFormsApp1
 
             } while (habilidade2 == habilidade1);
 
-            Elfo cartaCriaturaElfo = new Elfo(cor, custo, numHabilidade, habilidade1, habilidade2, descricao, ataque, defesa);
+            CartaCriaturaElfo = new Elfo(cor, custo, numHabilidade, habilidade1, habilidade2, descricao, ataque, defesa, Habilidades);
 
             if (numCarta == 1)
             {
-                acaoHabilidade1 = cartaCriaturaElfo.AcaoHabilidade;
-                ataque1 = cartaCriaturaElfo.AtaqueCriatura;
+                AcaoHabilidade1 = CartaCriaturaElfo.AcaoHabilidade;
+                Ataque1 = CartaCriaturaElfo.AtaqueCriatura;
             }
             else
             {
-                acaoHabilidade2 = cartaCriaturaElfo.AcaoHabilidade;
-                ataque2 = cartaCriaturaElfo.AtaqueCriatura;
+                AcaoHabilidade2 = CartaCriaturaElfo.AcaoHabilidade;
+                Ataque2 = CartaCriaturaElfo.AtaqueCriatura;
             }
-
-            return cartaCriaturaElfo;
         }
 
-        public Humano CriarCartaCriaturaHumano(int numCarta, ref int acaoHabilidade1, ref int acaoHabilidade2, ref int ataque1, ref int ataque2)
+        /// <summary>
+        /// Criar carta do tipo Criatura/Humano
+        /// </summary>
+        /// <param name="numCarta">Número que corresponde ao nº da carta a ser criada (1º carta ou 2º carta)</param>
+        public void CriarCartaCriaturaHumano(int numCarta)
         {
-            Random rng = new Random();
+            Random rng;
+
+            rng = GerarRandom(numCarta);
+
             int cor, custo, numHabilidade, habilidade1, habilidade2, descricao, ataque, defesa;
 
             cor = rng.Next(0, 5);
@@ -244,25 +384,30 @@ namespace WindowsFormsApp1
 
             } while (habilidade2 == habilidade1);
 
-            Humano cartaCriaturaHumano = new Humano(cor, custo, numHabilidade, habilidade1, habilidade2, descricao, ataque, defesa);
+            CartaCriaturaHumano = new Humano(cor, custo, numHabilidade, habilidade1, habilidade2, descricao, ataque, defesa, Habilidades);
 
             if (numCarta == 1)
             {
-                acaoHabilidade1 = cartaCriaturaHumano.AcaoHabilidade;
-                ataque1 = cartaCriaturaHumano.AtaqueCriatura;
+                AcaoHabilidade1 = CartaCriaturaHumano.AcaoHabilidade;
+                Ataque1 = CartaCriaturaHumano.AtaqueCriatura;
             }
             else
             {
-                acaoHabilidade2 = cartaCriaturaHumano.AcaoHabilidade;
-                ataque2 = cartaCriaturaHumano.AtaqueCriatura;
+                AcaoHabilidade2 = CartaCriaturaHumano.AcaoHabilidade;
+                Ataque2 = CartaCriaturaHumano.AtaqueCriatura;
             }
-
-            return cartaCriaturaHumano;
         }
 
-        public Orc CriarCartaCriaturaOrc(int numCarta, ref int acaoHabilidade1, ref int acaoHabilidade2, ref int ataque1, ref int ataque2)
+        /// <summary>
+        /// Criar carta do tipo Criatura/Orc
+        /// </summary>
+        /// <param name="numCarta">Número que corresponde ao nº da carta a ser criada (1º carta ou 2º carta)</param>
+        public void CriarCartaCriaturaOrc(int numCarta)
         {
-            Random rng = new Random();
+            Random rng;
+
+            rng = GerarRandom(numCarta);
+
             int cor, custo, numHabilidade, habilidade1, habilidade2, descricao, ataque, defesa;
 
             cor = rng.Next(0, 5);
@@ -279,25 +424,30 @@ namespace WindowsFormsApp1
 
             } while (habilidade2 == habilidade1);
 
-            Orc cartaCriaturaOrc = new Orc(cor, custo, numHabilidade, habilidade1, habilidade2, descricao, ataque, defesa);
+            CartaCriaturaOrc = new Orc(cor, custo, numHabilidade, habilidade1, habilidade2, descricao, ataque, defesa, Habilidades);
 
             if (numCarta == 1)
             {
-                acaoHabilidade1 = cartaCriaturaOrc.AcaoHabilidade;
-                ataque1 = cartaCriaturaOrc.AtaqueCriatura;
+                AcaoHabilidade1 = CartaCriaturaOrc.AcaoHabilidade;
+                Ataque1 = CartaCriaturaOrc.AtaqueCriatura;
             }
             else
             {
-                acaoHabilidade2 = cartaCriaturaOrc.AcaoHabilidade;
-                ataque2 = cartaCriaturaOrc.AtaqueCriatura;
+                AcaoHabilidade2 = CartaCriaturaOrc.AcaoHabilidade;
+                Ataque2 = CartaCriaturaOrc.AtaqueCriatura;
             }
-
-            return cartaCriaturaOrc;
         }
 
-        public Anao CriarCartaCriaturaAnao(int numCarta, ref int acaoHabilidade1, ref int acaoHabilidade2, ref int ataque1, ref int ataque2)
+        /// <summary>
+        /// Criar carta do tipo Criatura/Anão
+        /// </summary>
+        /// <param name="numCarta">Número que corresponde ao nº da carta a ser criada (1º carta ou 2º carta)</param>
+        public void CriarCartaCriaturaAnao(int numCarta)
         {
-            Random rng = new Random();
+            Random rng;
+
+            rng = GerarRandom(numCarta);
+
             int cor, custo, numHabilidade, habilidade1, habilidade2, descricao, ataque, defesa;
 
             cor = rng.Next(0, 5);
@@ -314,274 +464,260 @@ namespace WindowsFormsApp1
 
             } while (habilidade2 == habilidade1);
 
-            Anao cartaCriaturaAnao = new Anao(cor, custo, numHabilidade, habilidade1, habilidade2, descricao, ataque, defesa);
+            CartaCriaturaAnao = new Anao(cor, custo, numHabilidade, habilidade1, habilidade2, descricao, ataque, defesa, Habilidades);
 
             if (numCarta == 1)
             {
-                acaoHabilidade1 = cartaCriaturaAnao.AcaoHabilidade;
-                ataque1 = cartaCriaturaAnao.AtaqueCriatura;
+                AcaoHabilidade1 = CartaCriaturaAnao.AcaoHabilidade;
+                Ataque1 = CartaCriaturaAnao.AtaqueCriatura;
             }
             else
             {
-                acaoHabilidade2 = cartaCriaturaAnao.AcaoHabilidade;
-                ataque2 = cartaCriaturaAnao.AtaqueCriatura;
+                AcaoHabilidade2 = CartaCriaturaAnao.AcaoHabilidade;
+                Ataque2 = CartaCriaturaAnao.AtaqueCriatura;
             }
-
-            return cartaCriaturaAnao;
         }
 
-        public void ExibeTerreno(Terreno cartaTerreno, int numCarta)
+        /// <summary>
+        /// Passar para variáveis as informações da carta Terreno
+        /// </summary>
+        /// <param name="numCarta">Número que corresponde ao nº da carta a ser criada (1º carta ou 2º carta)</param>
+        public void ExibeTerreno(int numCarta)
         {
             string tipoCarta, nomeCarta, descricaoCarta;
             int custoCarta;
             Color corCarta;
 
-            tipoCarta = cartaTerreno.TipoCarta;
-            nomeCarta = cartaTerreno.NomeCarta;
-            corCarta = cartaTerreno.CorCarta;
-            custoCarta = cartaTerreno.CustoCarta;
-            descricaoCarta = cartaTerreno.DescricaoCarta;
+            tipoCarta = CartaTerreno.TipoCarta;
+            nomeCarta = CartaTerreno.NomeCarta;
+            corCarta = CartaTerreno.CorCarta;
+            custoCarta = CartaTerreno.CustoCarta;
+            descricaoCarta = CartaTerreno.DescricaoCarta;
 
             if (numCarta == 1)
             {
+                //Passar as variáveis com as informações da carta para o template 1
                 ExibeCarta1NaoCriatura(tipoCarta, nomeCarta, corCarta, descricaoCarta, custoCarta);
             }
             else
             {
+                //Passar as variáveis com as informações da carta para o template 2
                 ExibeCarta2NaoCriatura(tipoCarta, nomeCarta, corCarta, descricaoCarta, custoCarta);
             }
         }
 
-        public void ExibeFeitico(Feitico cartaFeitico, int numCarta)
+        /// <summary>
+        /// Passar para variáveis as informações da carta Feitiço
+        /// </summary>
+        /// <param name="numCarta">Número que corresponde ao nº da carta a ser criada (1º carta ou 2º carta)</param>
+        public void ExibeFeitico(int numCarta)
         {
             string tipoCarta, nomeCarta, descricaoCarta;
             int custoCarta;
             Color corCarta;
 
-            tipoCarta = cartaFeitico.TipoCarta;
-            nomeCarta = cartaFeitico.NomeCarta;
-            corCarta = cartaFeitico.CorCarta;
-            custoCarta = cartaFeitico.CustoCarta;
-            descricaoCarta = cartaFeitico.DescricaoCarta;
+            tipoCarta = CartaFeitico.TipoCarta;
+            nomeCarta = CartaFeitico.NomeCarta;
+            corCarta = CartaFeitico.CorCarta;
+            custoCarta = CartaFeitico.CustoCarta;
+            descricaoCarta = CartaFeitico.DescricaoCarta;
 
             if (numCarta == 1)
             {
+                //Passar as variáveis com as informações da carta para o template 1
                 ExibeCarta1NaoCriatura(tipoCarta, nomeCarta, corCarta, descricaoCarta, custoCarta);
             }
             else
             {
+                //Passar as variáveis com as informações da carta para o template 2
                 ExibeCarta2NaoCriatura(tipoCarta, nomeCarta, corCarta, descricaoCarta, custoCarta);
             }
         }
 
-        public void ExibeMagicaInstantanea(MagicaInstantanea cartaMagicaInstantanea, int numCarta)
+        /// <summary>
+        /// Passar para variáveis as informações da carta Mágica Instantânea
+        /// </summary>
+        /// <param name="numCarta">Número que corresponde ao nº da carta a ser criada (1º carta ou 2º carta)</param>
+        public void ExibeMagicaInstantanea(int numCarta)
         {
             string tipoCarta, nomeCarta, descricaoCarta;
             int custoCarta;
             Color corCarta;
 
-            tipoCarta = cartaMagicaInstantanea.TipoCarta;
-            nomeCarta = cartaMagicaInstantanea.NomeCarta;
-            corCarta = cartaMagicaInstantanea.CorCarta;
-            custoCarta = cartaMagicaInstantanea.CustoCarta;
-            descricaoCarta = cartaMagicaInstantanea.DescricaoCarta;
+            tipoCarta = CartaMagicaInstantanea.TipoCarta;
+            nomeCarta = CartaMagicaInstantanea.NomeCarta;
+            corCarta = CartaMagicaInstantanea.CorCarta;
+            custoCarta = CartaMagicaInstantanea.CustoCarta;
+            descricaoCarta = CartaMagicaInstantanea.DescricaoCarta;
 
             if (numCarta == 1)
             {
+                //Passar as variáveis com as informações da carta para o template 1
                 ExibeCarta1NaoCriatura(tipoCarta, nomeCarta, corCarta, descricaoCarta, custoCarta);
             }
             else
             {
+                //Passar as variáveis com as informações da carta para o template 2
                 ExibeCarta2NaoCriatura(tipoCarta, nomeCarta, corCarta, descricaoCarta, custoCarta);
             }
         }
 
-        public void ExibeEncantamento(Encantamento cartaEncantamento, int numCarta)
+        /// <summary>
+        /// Passar para variáveis as informações da carta Encantamento
+        /// </summary>
+        /// <param name="numCarta">Número que corresponde ao nº da carta a ser criada (1º carta ou 2º carta)</param>
+        public void ExibeEncantamento(int numCarta)
         {
             string tipoCarta, nomeCarta, descricaoCarta;
             int custoCarta;
             Color corCarta;
 
-            tipoCarta = cartaEncantamento.TipoCarta;
-            nomeCarta = cartaEncantamento.NomeCarta;
-            corCarta = cartaEncantamento.CorCarta;
-            custoCarta = cartaEncantamento.CustoCarta;
-            descricaoCarta = cartaEncantamento.DescricaoCarta;
+            tipoCarta = CartaEncantamento.TipoCarta;
+            nomeCarta = CartaEncantamento.NomeCarta;
+            corCarta = CartaEncantamento.CorCarta;
+            custoCarta = CartaEncantamento.CustoCarta;
+            descricaoCarta = CartaEncantamento.DescricaoCarta;
 
             if (numCarta == 1)
             {
+                //Passar as variáveis com as informações da carta para o template 1
                 ExibeCarta1NaoCriatura(tipoCarta, nomeCarta, corCarta, descricaoCarta, custoCarta);
             }
             else
             {
+                //Passar as variáveis com as informações da carta para o template 2
                 ExibeCarta2NaoCriatura(tipoCarta, nomeCarta, corCarta, descricaoCarta, custoCarta);
             }
         }
 
-        public void ExibeCriaturaElfo(Elfo cartaCriaturaElfo, int numCarta)
+        /// <summary>
+        /// Passar para variáveis as informações da carta Criatuta/Elfo
+        /// </summary>
+        /// <param name="numCarta">Número que corresponde ao nº da carta a ser criada (1º carta ou 2º carta)</param>
+        public void ExibeCriaturaElfo(int numCarta)
         {
             string tipoCarta, nomeCarta, descricaoCarta;
             int custoCarta, ataqueCriatura, defesaCriatura;
             Color corCarta;
 
-            tipoCarta = cartaCriaturaElfo.TipoCarta;
-            nomeCarta = cartaCriaturaElfo.NomeCarta;
-            corCarta = cartaCriaturaElfo.CorCarta;
-            custoCarta = cartaCriaturaElfo.CustoCarta;
-            descricaoCarta = cartaCriaturaElfo.DescricaoCarta;
-            ataqueCriatura = cartaCriaturaElfo.AtaqueCriatura;
-            defesaCriatura = cartaCriaturaElfo.DefesaCriatura;
+            tipoCarta = CartaCriaturaElfo.TipoCarta;
+            nomeCarta = CartaCriaturaElfo.NomeCarta;
+            corCarta = CartaCriaturaElfo.CorCarta;
+            custoCarta = CartaCriaturaElfo.CustoCarta;
+            descricaoCarta = CartaCriaturaElfo.DescricaoCarta;
+            ataqueCriatura = CartaCriaturaElfo.AtaqueCriatura;
+            defesaCriatura = CartaCriaturaElfo.DefesaCriatura;
 
             if (numCarta == 1)
             {
+                //Passar as variáveis com as informações da carta para o template 1
                 ExibeCarta1Criatura(tipoCarta, nomeCarta, corCarta, descricaoCarta, custoCarta, ataqueCriatura, defesaCriatura);
             }
             else
             {
+                //Passar as variáveis com as informações da carta para o template 2
                 ExibeCarta2Criatura(tipoCarta, nomeCarta, corCarta, descricaoCarta, custoCarta, ataqueCriatura, defesaCriatura);
             }
         }
 
-        public void ExibeCriaturaHumano(Humano cartaCriaturaHumano, int numCarta)
+        /// <summary>
+        /// Passar para variáveis as informações da carta Criatuta/Humano
+        /// </summary>
+        /// <param name="numCarta">Número que corresponde ao nº da carta a ser criada (1º carta ou 2º carta)</param>
+        public void ExibeCriaturaHumano(int numCarta)
         {
             string tipoCarta, nomeCarta, descricaoCarta;
             int custoCarta, ataqueCriatura, defesaCriatura;
             Color corCarta;
 
-            tipoCarta = cartaCriaturaHumano.TipoCarta;
-            nomeCarta = cartaCriaturaHumano.NomeCarta;
-            corCarta = cartaCriaturaHumano.CorCarta;
-            custoCarta = cartaCriaturaHumano.CustoCarta;
-            descricaoCarta = cartaCriaturaHumano.DescricaoCarta;
-            ataqueCriatura = cartaCriaturaHumano.AtaqueCriatura;
-            defesaCriatura = cartaCriaturaHumano.DefesaCriatura;
+            tipoCarta = CartaCriaturaHumano.TipoCarta;
+            nomeCarta = CartaCriaturaHumano.NomeCarta;
+            corCarta = CartaCriaturaHumano.CorCarta;
+            custoCarta = CartaCriaturaHumano.CustoCarta;
+            descricaoCarta = CartaCriaturaHumano.DescricaoCarta;
+            ataqueCriatura = CartaCriaturaHumano.AtaqueCriatura;
+            defesaCriatura = CartaCriaturaHumano.DefesaCriatura;
 
             if (numCarta == 1)
             {
+                //Passar as variáveis com as informações da carta para o template 1
                 ExibeCarta1Criatura(tipoCarta, nomeCarta, corCarta, descricaoCarta, custoCarta, ataqueCriatura, defesaCriatura);
             }
             else
             {
+                //Passar as variáveis com as informações da carta para o template 2
                 ExibeCarta2Criatura(tipoCarta, nomeCarta, corCarta, descricaoCarta, custoCarta, ataqueCriatura, defesaCriatura);
             }
         }
 
-        public void ExibeCriaturaOrc(Orc cartaCriaturaOrc, int numCarta)
+        /// <summary>
+        /// Passar para variáveis as informações da carta Criatuta/Orc
+        /// </summary>
+        /// <param name="numCarta">Número que corresponde ao nº da carta a ser criada (1º carta ou 2º carta)</param>
+        public void ExibeCriaturaOrc(int numCarta)
         {
             string tipoCarta, nomeCarta, descricaoCarta;
             int custoCarta, ataqueCriatura, defesaCriatura;
             Color corCarta;
 
-            tipoCarta = cartaCriaturaOrc.TipoCarta;
-            nomeCarta = cartaCriaturaOrc.NomeCarta;
-            corCarta = cartaCriaturaOrc.CorCarta;
-            custoCarta = cartaCriaturaOrc.CustoCarta;
-            descricaoCarta = cartaCriaturaOrc.DescricaoCarta;
-            ataqueCriatura = cartaCriaturaOrc.AtaqueCriatura;
-            defesaCriatura = cartaCriaturaOrc.DefesaCriatura;
+            tipoCarta = CartaCriaturaOrc.TipoCarta;
+            nomeCarta = CartaCriaturaOrc.NomeCarta;
+            corCarta = CartaCriaturaOrc.CorCarta;
+            custoCarta = CartaCriaturaOrc.CustoCarta;
+            descricaoCarta = CartaCriaturaOrc.DescricaoCarta;
+            ataqueCriatura = CartaCriaturaOrc.AtaqueCriatura;
+            defesaCriatura = CartaCriaturaOrc.DefesaCriatura;
 
             if (numCarta == 1)
             {
+                //Passar as variáveis com as informações da carta para o template 1
                 ExibeCarta1Criatura(tipoCarta, nomeCarta, corCarta, descricaoCarta, custoCarta, ataqueCriatura, defesaCriatura);
             }
             else
             {
+                //Passar as variáveis com as informações da carta para o template 2
                 ExibeCarta2Criatura(tipoCarta, nomeCarta, corCarta, descricaoCarta, custoCarta, ataqueCriatura, defesaCriatura);
             }
         }
 
-        private void btnLutar_Click(object sender, EventArgs e)
-        {
-            if (acaoEfeito1 > 0 && acaoEfeito2 > 0)
-            {
-                vida1 += acaoEfeito1;
-                vida2 += acaoEfeito2;
-
-                AtualizarVidaJogadores(vida1, vida2);
-            }
-            else if (acaoEfeito1 > 0)
-            {
-                vida1 += acaoEfeito1;
-                AtualizarVidaJogadores(vida1, vida2);
-
-                vida1 += acaoHabilidade2;
-                AtualizarVidaJogadores(vida1, vida2);
-                FinalizarJogo(ref vida1, ref vida2);
-
-                vida1 -= ataque2;
-                AtualizarVidaJogadores(vida1, vida2);
-                FinalizarJogo(ref vida1, ref vida2);
-            }
-            else if (acaoEfeito2 > 0)
-            {
-                vida2 += acaoEfeito2;
-
-                vida2 += acaoHabilidade1;
-                AtualizarVidaJogadores(vida1, vida2);
-                FinalizarJogo(ref vida1, ref vida2);
-
-                vida2 -= ataque1;
-                AtualizarVidaJogadores(vida1, vida2);
-                FinalizarJogo(ref vida1, ref vida2);
-            }
-            else
-            {
-                vida1 += acaoEfeito2;
-                AtualizarVidaJogadores(vida1, vida2);
-                FinalizarJogo(ref vida1, ref vida2);
-                vida2 += acaoEfeito1;
-                AtualizarVidaJogadores(vida1, vida2);
-                FinalizarJogo(ref vida1, ref vida2);
-
-                vida1 += acaoHabilidade2;
-                AtualizarVidaJogadores(vida1, vida2);
-                FinalizarJogo(ref vida1, ref vida2);
-                vida2 += acaoHabilidade1;
-                AtualizarVidaJogadores(vida1, vida2);
-                FinalizarJogo(ref vida1, ref vida2);
-
-                if (ataque1 > ataque2)
-                {
-                    vida2 -= (ataque1 - ataque2);
-                    AtualizarVidaJogadores(vida1, vida2);
-                    FinalizarJogo(ref vida1, ref vida2);
-                }
-                else if (ataque1 < ataque2)
-                {
-                    vida1 -= (ataque2 - ataque1);
-                    AtualizarVidaJogadores(vida1, vida2);
-                    FinalizarJogo(ref vida1, ref vida2);
-                }
-            }
-
-            btnGerar.Enabled = true;
-            btnLutar.Enabled = false;
-        }
-
-        public void ExibeCriaturaAnao(Anao cartaCriaturaAnao, int numCarta)
+        /// <summary>
+        /// Passar para variáveis as informações da carta Criatuta/Anão
+        /// </summary>
+        /// <param name="numCarta">Número que corresponde ao nº da carta a ser criada (1º carta ou 2º carta)</param>
+        public void ExibeCriaturaAnao(int numCarta)
         {
             string tipoCarta, nomeCarta, descricaoCarta;
             int custoCarta, ataqueCriatura, defesaCriatura;
             Color corCarta;
 
-            tipoCarta = cartaCriaturaAnao.TipoCarta;
-            nomeCarta = cartaCriaturaAnao.NomeCarta;
-            corCarta = cartaCriaturaAnao.CorCarta;
-            custoCarta = cartaCriaturaAnao.CustoCarta;
-            descricaoCarta = cartaCriaturaAnao.DescricaoCarta;
-            ataqueCriatura = cartaCriaturaAnao.AtaqueCriatura;
-            defesaCriatura = cartaCriaturaAnao.DefesaCriatura;
+            tipoCarta = CartaCriaturaAnao.TipoCarta;
+            nomeCarta = CartaCriaturaAnao.NomeCarta;
+            corCarta = CartaCriaturaAnao.CorCarta;
+            custoCarta = CartaCriaturaAnao.CustoCarta;
+            descricaoCarta = CartaCriaturaAnao.DescricaoCarta;
+            ataqueCriatura = CartaCriaturaAnao.AtaqueCriatura;
+            defesaCriatura = CartaCriaturaAnao.DefesaCriatura;
 
             if (numCarta == 1)
             {
+                //Passar as variáveis com as informações da carta para o template 1
                 ExibeCarta1Criatura(tipoCarta, nomeCarta, corCarta, descricaoCarta, custoCarta, ataqueCriatura, defesaCriatura);
             }
             else
             {
+                //Passar as variáveis com as informações da carta para o template 2
                 ExibeCarta2Criatura(tipoCarta, nomeCarta, corCarta, descricaoCarta, custoCarta, ataqueCriatura, defesaCriatura);
             }
         }
 
+        /// <summary>
+        /// Passar as variáveis com a informação da carta não criatura para o template 1
+        /// </summary>
+        /// <param name="tipoCarta">Tipo da carta</param>
+        /// <param name="nomeCarta">Nome da carta</param>
+        /// <param name="corCarta">Cor da carta</param>
+        /// <param name="descricaoCarta">Descrição da carta</param>
+        /// <param name="custoCarta">Custo da carta</param>
         public void ExibeCarta1NaoCriatura(string tipoCarta, string nomeCarta, Color corCarta, string descricaoCarta, int custoCarta)
         {
             lblStats1.Visible = false;
@@ -592,6 +728,16 @@ namespace WindowsFormsApp1
             panel1.BackColor = corCarta;
         }
 
+        /// <summary>
+        /// Passar as variáveis com a informação da carta criatura para o template 1
+        /// </summary>
+        /// <param name="tipoCarta">Tipo da carta</param>
+        /// <param name="nomeCarta">Nome da carta</param>
+        /// <param name="corCarta">Cor da carta</param>
+        /// <param name="descricaoCarta">Descrição da carta</param>
+        /// <param name="custoCarta">Custo da carta</param>
+        /// <param name="ataqueCriatura">Ataque da criatura</param>
+        /// <param name="defesaCriatura">Defesa da criatura</param>
         public void ExibeCarta1Criatura(string tipoCarta, string nomeCarta, Color corCarta, string descricaoCarta, int custoCarta, int ataqueCriatura, int defesaCriatura)
         {
             lblStats1.Visible = true;
@@ -603,18 +749,14 @@ namespace WindowsFormsApp1
             panel1.BackColor = corCarta;
         }
 
-        private void btnIniciar_Click(object sender, EventArgs e)
-        {
-            btnIniciar.Visible = false;
-            btnGerar.Visible = true;
-            btnLutar.Visible = true;
-            panel1.Visible = true;
-            panel2.Visible = true;
-            panel3.Visible = true;
-            panel4.Visible = true;
-            VidaInicialJogadores(ref vida1, ref vida2);
-        }
-
+        /// <summary>
+        /// Passar as variáveis com a informação da carta não criatura para o template 2
+        /// </summary>
+        /// <param name="tipoCarta">Tipo da carta</param>
+        /// <param name="nomeCarta">Nome da carta</param>
+        /// <param name="corCarta">Cor da carta</param>
+        /// <param name="descricaoCarta">Descrição da carta</param>
+        /// <param name="custoCarta">Custo da carta</param>
         public void ExibeCarta2NaoCriatura(string tipoCarta, string nomeCarta, Color corCarta, string descricaoCarta, int custoCarta)
         {
             lblStats2.Visible = false;
@@ -625,6 +767,16 @@ namespace WindowsFormsApp1
             panel2.BackColor = corCarta;
         }
 
+        /// <summary>
+        /// Passar as variáveis com a informação da carta criatura para o template 2
+        /// </summary>
+        /// <param name="tipoCarta">Tipo da carta</param>
+        /// <param name="nomeCarta">Nome da carta</param>
+        /// <param name="corCarta">Cor da carta</param>
+        /// <param name="descricaoCarta">Descrição da carta</param>
+        /// <param name="custoCarta">Custo da carta</param>
+        /// <param name="ataqueCriatura">Ataque da criatura</param>
+        /// <param name="defesaCriatura">Defesa da criatura</param>
         public void ExibeCarta2Criatura(string tipoCarta, string nomeCarta, Color corCarta, string descricaoCarta, int custoCarta, int ataqueCriatura, int defesaCriatura)
         {
             lblStats2.Visible = true;
@@ -636,67 +788,80 @@ namespace WindowsFormsApp1
             panel2.BackColor = corCarta;
         }
 
-        public void VidaInicialJogadores(ref int vida1, ref int vida2)
+        /// <summary>
+        /// Definir a vida inicial dos 2 jogadores e apresentá-la
+        /// </summary>
+        public void VidaInicialJogadores()
         {
-            vida1 = 20;
-            vida2 = 20;
+            Vida1 = 20;
+            Vida2 = 20;
 
             lblJogador1.Text = "Jogador 1";
             lblJogador2.Text = "Jogador 2";
-            lblVida1.Text = $"{vida1} HP";
-            lblVida2.Text = $"{vida2} HP";
+            lblVida1.Text = $"{Vida1} HP";
+            lblVida2.Text = $"{Vida2} HP";
         }
 
-        public void AtualizarVidaJogadores(int vida1, int vida2)
+        /// <summary>
+        /// Atualizar as labels com a vida dos jogadores, após luta
+        /// </summary>
+        public void AtualizarVidaJogadores()
         {
-            if (vida1 >= 0 && vida2 >= 0)
+            if (Vida1 >= 0 && Vida2 >= 0)
             {
-                lblVida1.Text = $"{vida1} HP";
-                lblVida2.Text = $"{vida2} HP";
+                lblVida1.Text = $"{Vida1} HP";
+                lblVida2.Text = $"{Vida2} HP";
             }
             else
             {
-                if (vida1 < 0)
+                if (Vida1 < 0)
                 {
                     lblVida1.Text = $"0 HP";
-                    lblVida2.Text = $"{vida2} HP";
+                    lblVida2.Text = $"{Vida2} HP";
                 }
                 else
                 {
-                    lblVida1.Text = $"{vida1} HP";
+                    lblVida1.Text = $"{Vida1} HP";
                     lblVida2.Text = $"0 HP";
                 }
             }
         }
 
-        public void FinalizarJogo(ref int vida1, ref int vida2)
+        /// <summary>
+        /// Finalizar o jogo quando a vida de um dos jogadores chega a 0
+        /// </summary>
+        public void FinalizarJogo()
         {
             DialogResult resposta;
 
-            if (vida1 <= 0)
+            if (Vida1 <= 0)
             {
                 resposta = MessageBox.Show($"Jogador 2 ganhou!", "Vencedor", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 if (resposta == DialogResult.OK)
                 {
                     LimparForm();
-                    vida1 = 1;
+                    Vida1 = 1;
                 }
             }
-            else if (vida2 <= 0)
+            else if (Vida2 <= 0)
             {
                 resposta = MessageBox.Show($"Jogador 1 ganhou!", "Vencedor", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 if (resposta == DialogResult.OK)
                 {
                     LimparForm();
-                    vida2 = 1;
+                    Vida2 = 1;
                 }
             }
         }
 
+        /// <summary>
+        /// Limpar o form, para se poder iniciar novo jogo
+        /// </summary>
         public void LimparForm()
         {
+            LimparCartas();
             btnIniciar.Visible = true;
             btnGerar.Visible = false;
             btnLutar.Visible = false;
@@ -704,15 +869,17 @@ namespace WindowsFormsApp1
             panel2.Visible = false;
             panel3.Visible = false;
             panel4.Visible = false;
-            LimparCartas();
-            acaoEfeito1 = 0;
-            acaoEfeito2 = 0;
-            acaoHabilidade1 = 0;
-            acaoHabilidade2 = 0;
-            ataque1 = 0;
-            ataque2 = 0;
+            AcaoEfeito1 = 0;
+            AcaoEfeito2 = 0;
+            AcaoHabilidade1 = 0;
+            AcaoHabilidade2 = 0;
+            Ataque1 = 0;
+            Ataque2 = 0;
         }
 
+        /// <summary>
+        /// Limpar os templates das cartas
+        /// </summary>
         public void LimparCartas()
         {
             panel1.BackColor = Color.FromName("White");
@@ -728,6 +895,56 @@ namespace WindowsFormsApp1
             lblTipo2.Text = string.Empty;
             lblDescricao2.Text = string.Empty;
             lblStats2.Text = string.Empty;
+        }
+
+        /// <summary>
+        /// Gerar random, com uma seed que depende do número da carta a ser criada (1º carta ou 2º carta)
+        /// </summary>
+        /// <param name="numCarta"></param>
+        /// <returns></returns>
+        public Random GerarRandom(int numCarta)
+        {
+            Random rng;
+
+            if (numCarta == 1)
+            {
+                Random random = new Random();
+                rng = new Random(random.Next(0, 1000001));
+            }
+            else
+            {
+                Random random = new Random();
+                rng = new Random(random.Next(1000002, 2000001));
+            }
+
+            return rng;
+        }
+
+        /// <summary>
+        /// Preparar para o novo turno do jogo
+        /// </summary>
+        public void NovoTurno()
+        {
+            AcaoEfeito1 = 0;
+            AcaoEfeito2 = 0;
+            AcaoHabilidade1 = 0;
+            AcaoHabilidade2 = 0;
+            Ataque1 = 0;
+            Ataque2 = 0;
+            CartaTerreno = null;
+            CartaFeitico = null;
+            CartaMagicaInstantanea = null;
+            CartaEncantamento = null;
+            CartaCriaturaElfo = null;
+            CartaCriaturaHumano = null;
+            CartaCriaturaOrc = null;
+            CartaCriaturaAnao = null;
+        }
+
+        //Créditos
+        private void btnCreditos_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"Feito por André Martins{Environment.NewLine}Versão 1.3{Environment.NewLine}Data: 01/03/2020", "Créditos", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

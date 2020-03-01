@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Magic));
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblStats1 = new System.Windows.Forms.Label();
             this.lblDescricao1 = new System.Windows.Forms.Label();
@@ -51,6 +52,7 @@
             this.lblJogador2 = new System.Windows.Forms.Label();
             this.lblVida2 = new System.Windows.Forms.Label();
             this.btnLutar = new System.Windows.Forms.Button();
+            this.btnCreditos = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -317,11 +319,23 @@
             this.btnLutar.Visible = false;
             this.btnLutar.Click += new System.EventHandler(this.btnLutar_Click);
             // 
+            // btnCreditos
+            // 
+            this.btnCreditos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCreditos.Location = new System.Drawing.Point(1140, 699);
+            this.btnCreditos.Name = "btnCreditos";
+            this.btnCreditos.Size = new System.Drawing.Size(113, 29);
+            this.btnCreditos.TabIndex = 11;
+            this.btnCreditos.Text = "Créditos";
+            this.btnCreditos.UseVisualStyleBackColor = true;
+            this.btnCreditos.Click += new System.EventHandler(this.btnCreditos_Click);
+            // 
             // Magic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 740);
+            this.Controls.Add(this.btnCreditos);
             this.Controls.Add(this.btnLutar);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -329,6 +343,7 @@
             this.Controls.Add(this.btnGerar);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1283, 787);
             this.Name = "Magic";
             this.Text = "Magic";
@@ -367,6 +382,7 @@
         private System.Windows.Forms.Label lblJogador2;
         private System.Windows.Forms.Label lblVida2;
         private System.Windows.Forms.Button btnLutar;
+        private System.Windows.Forms.Button btnCreditos;
     }
 }
 

@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Biblioteca", "Biblioteca\Biblioteca.csproj", "{4F41094F-831B-4519-9C06-2473F19E9C72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{160C9798-CBB8-4485-A223-7EDE82D539ED}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "WindowsFormsApp1\WindowsFormsApp1.csproj", "{3C9150B6-0277-477F-87B2-14472BDD44CC}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MagicSetup", "MagicSetup\MagicSetup.vdproj", "{DFF930AF-5468-4272-B5E7-1AB26DFC2CDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,12 @@ Global
 		{4F41094F-831B-4519-9C06-2473F19E9C72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F41094F-831B-4519-9C06-2473F19E9C72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F41094F-831B-4519-9C06-2473F19E9C72}.Release|Any CPU.Build.0 = Release|Any CPU
-		{160C9798-CBB8-4485-A223-7EDE82D539ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{160C9798-CBB8-4485-A223-7EDE82D539ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{160C9798-CBB8-4485-A223-7EDE82D539ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{160C9798-CBB8-4485-A223-7EDE82D539ED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3C9150B6-0277-477F-87B2-14472BDD44CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3C9150B6-0277-477F-87B2-14472BDD44CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C9150B6-0277-477F-87B2-14472BDD44CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C9150B6-0277-477F-87B2-14472BDD44CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFF930AF-5468-4272-B5E7-1AB26DFC2CDF}.Debug|Any CPU.ActiveCfg = Debug
+		{DFF930AF-5468-4272-B5E7-1AB26DFC2CDF}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
