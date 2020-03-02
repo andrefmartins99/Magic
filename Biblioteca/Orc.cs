@@ -6,15 +6,10 @@ namespace Biblioteca
 {
     public class Orc : Criatura
     {
-        public Orc(int cor, int custo, int numHabilidade, int habilidade1, int habilidade2, int descricao, int ataque, int defesa) : base(cor, custo, numHabilidade, habilidade1, habilidade2, ataque, defesa)
+        public Orc(int cor, int custo, int numHabilidade, int habilidade1, int habilidade2, int descricao, int ataque, int defesa, List<Habilidade> Habilidades) : base(cor, custo, numHabilidade, habilidade1, habilidade2, ataque, defesa, Habilidades)
         {
             NomeCarta = "Orc";
-            FinalizarDescricaoCriatura(descricao);
-        }
-
-        public void FinalizarDescricaoCriatura(int descricao)
-        {
-            DescricaoCarta += Environment.NewLine + $"Descrição: {NomeCarta} {DescreverCriatura(descricao)}";
+            DescricaoCarta = MetodosCriatura.DescricaoCriatura(numHabilidade, habilidade1, habilidade2, Habilidades, descricao, NomeCarta);
         }
     }
 }

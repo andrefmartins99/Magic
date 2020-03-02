@@ -6,7 +6,7 @@ namespace Biblioteca
 {
     public class MagicaInstantanea : CartaEfeito
     {
-        public MagicaInstantanea(int cor, int custo, int efeito) : base(cor, custo, efeito)
+        public MagicaInstantanea(int cor, int custo, int efeito, List<Efeito> Efeitos) : base(cor, custo, efeito, Efeitos)
         {
             TipoCarta = "Mágica Instantânea";
         }

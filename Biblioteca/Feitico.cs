@@ -6,7 +6,7 @@ namespace Biblioteca
 {
     public class Feitico : CartaEfeito
     {
-        public Feitico(int cor, int custo, int efeito) : base(cor, custo, efeito)
+        public Feitico(int cor, int custo, int efeito, List<Efeito> Efeitos) : base(cor, custo, efeito, Efeitos)
         {
             TipoCarta = "Feitiço";
         }
