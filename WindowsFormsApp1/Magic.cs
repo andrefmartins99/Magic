@@ -76,6 +76,7 @@ namespace WindowsFormsApp1
             int rnd;
             int numCarta = 1;
             NovoTurno();
+
             rng = GerarRandom(numCarta);
 
             do
